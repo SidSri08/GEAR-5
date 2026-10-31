@@ -16,37 +16,29 @@ app.post("/api/plan", async (req, res) => {
             return res.status(400).json({ error: "Please enter a goal." });
         }
 
-        const response = await fetch("http://127.0.0.1:11434/api/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                model: "gemma4:e2b",
-                stream: false,
-                messages: [
-                    {
-                        role: "system",
-                        content: `You are GEAR 5, an anime-inspired productivity coach.
-Break the user's goal into 3 to 5 small, realistic tasks.
+       const response = await fetch("http://127.0.0.1:11434/api/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        model: "gemma4:e2b",
+        prompt: `You are GEAR 5, an anime-inspired productivity coach.
+Break this goal into 3 to 5 small, realistic tasks:
+${goal}
+
 Return ONLY valid JSON in this exact format:
-{"tasks":[{"title":"Task name","minutes":30,"difficulty":"Easy"}]}`
-                    },
-                    {
-                        role: "user",
-                        content: goal
-                    }
-                ]
-            })
-        });
+{"tasks":[{"title":"Task name","minutes":30,"difficulty":"Easy"}]}`,
+        format: "json",
+        stream: false
+    })
+});
 
-        if (!response.ok) {
-            throw new Error("Ollama returned an error: " + response.status);
-        }
-
+if (!response.ok) {
+    throw new Error("Ollama returned an error: " + response.status);
+}
         const data = await response.json();
-        const answer = data.message.content;
-        const clean = answer.replace(/```json|```/g, "").trim();
-        const result = JSON.parse(clean);
-
+const answer = data.response;
+const clean = answer.replace(/```json|```/g, "").trim();
+const result = JSON.parse(clean);
         res.json(result);
     } catch (error) {
         console.error(error);
