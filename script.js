@@ -3,14 +3,24 @@
 
 let xp = Number(localStorage.getItem("gearXP")) || 0;
 let berries = Number(localStorage.getItem("gearBerries")) || 0;
+
 let tasks = JSON.parse(localStorage.getItem("gearTasks") || "[]");
 
+let habits = JSON.parse(localStorage.getItem("gearHabits") || "null") || [
+    { id: 1, name: "📚 Study for 30 minutes", done: false },
+    { id: 2, name: "💧 Drink enough water", done: false },
+    { id: 3, name: "🏃 Move your body", done: false }
+];
+
+// Save all data
 function saveData() {
     localStorage.setItem("gearXP", xp);
     localStorage.setItem("gearBerries", berries);
     localStorage.setItem("gearTasks", JSON.stringify(tasks));
+    localStorage.setItem("gearHabits", JSON.stringify(habits));
 }
 
+// Update dashboard
 function updateStats() {
     document.getElementById("xp").textContent = xp + " XP";
     document.getElementById("berries").textContent = berries;
@@ -18,6 +28,7 @@ function updateStats() {
     document.getElementById("taskCount").textContent = tasks.length + " missions";
 }
 
+// Render tasks
 function renderTasks() {
     const list = document.getElementById("taskList");
     list.innerHTML = "";
@@ -28,11 +39,13 @@ function renderTasks() {
 
         const name = document.createElement("span");
         name.textContent = task.text;
+
         if (task.done) name.className = "completed";
 
         const complete = document.createElement("button");
         complete.textContent = task.done ? "Completed ✓" : "Complete";
         complete.disabled = task.done;
+
         complete.onclick = () => {
             if (!task.done) {
                 task.done = true;
@@ -46,6 +59,7 @@ function renderTasks() {
 
         const remove = document.createElement("button");
         remove.textContent = "✕";
+
         remove.onclick = () => {
             tasks.splice(index, 1);
             saveData();
@@ -60,6 +74,7 @@ function renderTasks() {
     updateStats();
 }
 
+// Add a new task
 document.getElementById("addBtn").addEventListener("click", () => {
     const input = document.getElementById("taskInput");
     const text = input.value.trim();
@@ -68,12 +83,12 @@ document.getElementById("addBtn").addEventListener("click", () => {
 
     tasks.push({ text, done: false });
     input.value = "";
+
     saveData();
     renderTasks();
 });
 
-// Temporary planner fallback while we connect Gemma
-
+// Gemma AI Mission Planner
 document.getElementById("planBtn").addEventListener("click", async () => {
     const goal = document.getElementById("goal").value.trim();
     const result = document.getElementById("aiResult");
@@ -112,11 +127,89 @@ document.getElementById("planBtn").addEventListener("click", async () => {
         renderTasks();
 
         result.textContent = "🏴‍☠️ Gemma created " + data.tasks.length + " missions!";
+
     } catch (error) {
         result.textContent = "Error: " + error.message;
+
     } finally {
         button.disabled = false;
         button.textContent = "✨ Generate my missions";
     }
 });
+
+// Render all habits
+function renderHabits() {
+    const list = document.getElementById("habitList");
+    list.innerHTML = "";
+
+    habits.forEach((habit, index) => {
+        const item = document.createElement("div");
+        item.className = "habit";
+
+        const name = document.createElement("span");
+        name.textContent = habit.name;
+
+        if (habit.done) {
+            name.className = "completed";
+        }
+
+        const complete = document.createElement("button");
+        complete.className = "primary";
+        complete.textContent = habit.done ? "Completed ✓" : "Complete +10 XP";
+        complete.disabled = habit.done;
+
+        complete.onclick = () => {
+            if (habit.done) return;
+
+            habit.done = true;
+            xp += 10;
+
+            saveData();
+            renderHabits();
+            updateStats();
+        };
+
+        const remove = document.createElement("button");
+        remove.textContent = "✕";
+
+        remove.onclick = () => {
+            habits.splice(index, 1);
+            saveData();
+            renderHabits();
+        };
+
+        item.append(name, complete, remove);
+        list.appendChild(item);
+    });
+}
+
+// Add a custom habit
+document.getElementById("addHabitBtn").addEventListener("click", () => {
+    const input = document.getElementById("habitInput");
+    const name = input.value.trim();
+
+    if (!name) return;
+
+    habits.push({
+        id: Date.now(),
+        name: name,
+        done: false
+    });
+
+    input.value = "";
+
+    saveData();
+    renderHabits();
+});
+
+// Allow Enter key to add habits
+document.getElementById("habitInput").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        document.getElementById("addHabitBtn").click();
+    }
+});
+
+// Initial page rendering
 renderTasks();
+renderHabits();
+updateStats();
