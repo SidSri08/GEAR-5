@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEAR 5 | Pirate Productivity</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <h1>🏴‍☠️ GEAR 5</h1>
+        <p class="tagline">YOUR NEXT ADVENTURE</p>
+        <nav>
+            <a class="active" href="#">⚡ Dashboard</a>
+            <a href="#tasks">📜 My Quests</a>
+            <a href="#planner">🧠 AI Planner</a>
+            <a href="#habits">🔥 Habits</a>
+        </nav>
+        <div class="pirate-card">
+            <div class="avatar">👒</div>
+            <h3>Future Pirate King</h3>
+            <p>Keep moving forward!</p>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header>
+            <div>
+                <p class="eyebrow">SATURDAY · YOUR JOURNEY CONTINUES</p>
+                <h2>Welcome aboard, Captain! 👋</h2>
+                <p class="muted">Every great adventure starts with one small step.</p>
+            </div>
+            <div class="level">LEVEL <strong id="level">1</strong> ⭐</div>
+        </header>
+
+        <section class="stats">
+            <div class="stat"><span>⚡ EXPERIENCE</span><h2 id="xp">0 XP</h2></div>
+            <div class="stat"><span>🪙 BERRIES</span><h2 id="berries">0</h2></div>
+            <div class="stat"><span>🔥 STREAK</span><h2 id="streak">0 days</h2></div>
+        </section>
+
+        <section class="panel" id="planner">
+            <div class="section-heading">
+                <div><span class="eyebrow">YOUR AI COMPANION</span><h2>🧠 Mission Planner</h2></div>
+                <span class="ai-badge">GEMMA AI</span>
+            </div>
+            <p class="muted">Got a big goal? Let your AI companion break it into smaller missions.</p>
+            <textarea id="goal" placeholder="Example: Prepare for my physics exam and finish my Java assignment..."></textarea>
+            <button class="primary" id="planBtn">✨ Generate my missions</button>
+            <div id="aiResult"></div>
+        </section>
+
+        <section class="panel" id="tasks">
+            <div class="section-heading">
+                <div><span class="eyebrow">THE ADVENTURE AWAITS</span><h2>📜 Your Quests</h2></div>
+                <span id="taskCount" class="muted">0 missions</span>
+            </div>
+            <div class="add-task">
+                <input id="taskInput" placeholder="Add your next mission...">
+                <button class="primary" id="addBtn">+ Add</button>
+            </div>
+            <div id="taskList"></div>
+        </section>
+
+        <section class="panel" id="habits">
+            <span class="eyebrow">BUILD YOUR LEGEND</span>
+            <h2>🔥 Daily Habits</h2>
+            <p class="muted">Small actions. Legendary results.</p>
+            <div class="habit">📚 Study for 30 minutes <span>+10 XP</span></div>
+            <div class="habit">💧 Drink enough water <span>+10 XP</span></div>
+            <div class="habit">🏃 Move your body <span>+10 XP</span></div>
+        </section>
+        <footer>GEAR 5 · SET SAIL TOWARDS YOUR DREAMS 🏴‍☠️</footer>
+    </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

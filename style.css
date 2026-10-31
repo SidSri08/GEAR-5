@@ -1,0 +1,307 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #111020;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 245px;
+    background: #19172d;
+    border-right: 1px solid #302b4b;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar h1 {
+    color: #f1c75b;
+    font-size: 29px;
+}
+
+.tagline, .eyebrow {
+    color: #a69acb;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-top: 9px;
+}
+
+nav {
+    display: grid;
+    gap: 12px;
+    margin-top: 45px;
+}
+
+nav a {
+    color: #bcb6d1;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+nav a:hover, nav a.active {
+    background: #30264e;
+    color: #f1c75b;
+}
+
+.pirate-card {
+    margin-top: auto;
+    background: linear-gradient(145deg, #38285c, #211c3c);
+    border: 1px solid #594481;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+}
+
+.avatar {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+
+.pirate-card h3 {
+    font-size: 14px;
+}
+
+.pirate-card p {
+    font-size: 11px;
+    color: #c5b9e4;
+    margin-top: 8px;
+}
+
+.main {
+    flex: 1;
+    max-width: 1200px;
+    padding: 40px;
+    margin: auto;
+}
+
+header, .section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+header h2 {
+    font-size: 27px;
+    margin-top: 12px;
+}
+
+.muted {
+    color: #a8a2bd;
+    font-size: 13px;
+    margin-top: 9px;
+}
+
+.level {
+    background: #2d2549;
+    border: 1px solid #604b91;
+    color: #e5dafa;
+    border-radius: 12px;
+    padding: 13px 18px;
+    font-size: 12px;
+}
+
+.level strong {
+    color: #f1c75b;
+    font-size: 21px;
+    margin: 0 6px;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 30px 0;
+}
+
+.stat, .panel {
+    background: #1c1932;
+    border: 1px solid #342c50;
+    border-radius: 16px;
+    padding: 23px;
+}
+
+.stat span {
+    color: #a69acb;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.stat h2 {
+    color: #f1c75b;
+    font-size: 28px;
+    margin-top: 13px;
+}
+
+.panel {
+    margin-bottom: 22px;
+}
+
+.panel h2 {
+    font-size: 21px;
+    margin-top: 8px;
+}
+
+.ai-badge {
+    background: #45336c;
+    color: #d8c2ff;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+textarea, input {
+    width: 100%;
+    background: #111020;
+    color: white;
+    border: 1px solid #44385f;
+    border-radius: 10px;
+    padding: 15px;
+    outline: none;
+    font: inherit;
+    font-size: 13px;
+}
+
+textarea {
+    height: 95px;
+    resize: vertical;
+    margin: 20px 0 12px;
+}
+
+textarea:focus, input:focus {
+    border-color: #a47aff;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 9px;
+    padding: 12px 17px;
+    font-weight: 700;
+}
+
+.primary {
+    background: #8055c9;
+    color: white;
+}
+
+.primary:hover {
+    background: #9b70e5;
+}
+
+.add-task {
+    display: flex;
+    gap: 12px;
+    margin: 22px 0;
+}
+
+.add-task input {
+    flex: 1;
+}
+
+.task, .habit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #25213e;
+    border: 1px solid #3a3156;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 11px;
+    font-size: 13px;
+}
+
+.task span {
+    flex: 1;
+    overflow-wrap: anywhere;
+}
+
+.task button {
+    background: #47356d;
+    color: white;
+    font-size: 11px;
+}
+
+.task button:disabled {
+    opacity: .6;
+    cursor: default;
+}
+
+.task .completed {
+    text-decoration: line-through;
+    color: #8d86a5;
+}
+
+.habit span {
+    color: #f1c75b;
+    font-weight: 700;
+}
+
+#aiResult {
+    color: #f1c75b;
+    margin-top: 14px;
+    font-size: 13px;
+}
+
+footer {
+    text-align: center;
+    color: #77718d;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 25px;
+}
+
+@media (max-width: 750px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 18px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 20px;
+        gap: 5px;
+    }
+
+    .pirate-card {
+        display: none;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    header h2 {
+        font-size: 20px;
+    }
+}
